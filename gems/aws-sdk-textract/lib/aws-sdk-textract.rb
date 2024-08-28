@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-textract/types'
-require_relative 'aws-sdk-textract/client_api'
-require_relative 'aws-sdk-textract/plugins/endpoints.rb'
-require_relative 'aws-sdk-textract/client'
-require_relative 'aws-sdk-textract/errors'
-require_relative 'aws-sdk-textract/resource'
-require_relative 'aws-sdk-textract/endpoint_parameters'
-require_relative 'aws-sdk-textract/endpoint_provider'
-require_relative 'aws-sdk-textract/endpoints'
 require_relative 'aws-sdk-textract/customizations'
 
 # This module provides support for Amazon Textract. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-textract/customizations'
 #
 # @!group service
 module Aws::Textract
+  autoload :Types, 'aws-sdk-textract/types'
+  autoload :ClientApi, 'aws-sdk-textract/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-textract/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-textract/client'
+  autoload :Errors, 'aws-sdk-textract/errors'
+  autoload :Resource, 'aws-sdk-textract/resource'
+  autoload :EndpointParameters, 'aws-sdk-textract/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-textract/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-textract/endpoints'
 
   GEM_VERSION = '1.63.0'
 

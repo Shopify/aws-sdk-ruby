@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-migrationhub/types'
-require_relative 'aws-sdk-migrationhub/client_api'
-require_relative 'aws-sdk-migrationhub/plugins/endpoints.rb'
-require_relative 'aws-sdk-migrationhub/client'
-require_relative 'aws-sdk-migrationhub/errors'
-require_relative 'aws-sdk-migrationhub/resource'
-require_relative 'aws-sdk-migrationhub/endpoint_parameters'
-require_relative 'aws-sdk-migrationhub/endpoint_provider'
-require_relative 'aws-sdk-migrationhub/endpoints'
 require_relative 'aws-sdk-migrationhub/customizations'
 
 # This module provides support for AWS Migration Hub. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-migrationhub/customizations'
 #
 # @!group service
 module Aws::MigrationHub
+  autoload :Types, 'aws-sdk-migrationhub/types'
+  autoload :ClientApi, 'aws-sdk-migrationhub/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-migrationhub/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-migrationhub/client'
+  autoload :Errors, 'aws-sdk-migrationhub/errors'
+  autoload :Resource, 'aws-sdk-migrationhub/resource'
+  autoload :EndpointParameters, 'aws-sdk-migrationhub/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-migrationhub/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-migrationhub/endpoints'
 
   GEM_VERSION = '1.59.0'
 

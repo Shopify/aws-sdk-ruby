@@ -11,16 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-acmpca/types'
-require_relative 'aws-sdk-acmpca/client_api'
-require_relative 'aws-sdk-acmpca/plugins/endpoints.rb'
-require_relative 'aws-sdk-acmpca/client'
-require_relative 'aws-sdk-acmpca/errors'
-require_relative 'aws-sdk-acmpca/waiters'
-require_relative 'aws-sdk-acmpca/resource'
-require_relative 'aws-sdk-acmpca/endpoint_parameters'
-require_relative 'aws-sdk-acmpca/endpoint_provider'
-require_relative 'aws-sdk-acmpca/endpoints'
 require_relative 'aws-sdk-acmpca/customizations'
 
 # This module provides support for AWS Certificate Manager Private Certificate Authority. This module is available in the
@@ -52,6 +42,18 @@ require_relative 'aws-sdk-acmpca/customizations'
 #
 # @!group service
 module Aws::ACMPCA
+  autoload :Types, 'aws-sdk-acmpca/types'
+  autoload :ClientApi, 'aws-sdk-acmpca/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-acmpca/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-acmpca/client'
+  autoload :Errors, 'aws-sdk-acmpca/errors'
+  autoload :Waiters, 'aws-sdk-acmpca/waiters'
+  autoload :Resource, 'aws-sdk-acmpca/resource'
+  autoload :EndpointParameters, 'aws-sdk-acmpca/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-acmpca/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-acmpca/endpoints'
 
   GEM_VERSION = '1.76.0'
 

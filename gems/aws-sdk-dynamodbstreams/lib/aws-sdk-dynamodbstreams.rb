@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-dynamodbstreams/types'
-require_relative 'aws-sdk-dynamodbstreams/client_api'
-require_relative 'aws-sdk-dynamodbstreams/plugins/endpoints.rb'
-require_relative 'aws-sdk-dynamodbstreams/client'
-require_relative 'aws-sdk-dynamodbstreams/errors'
-require_relative 'aws-sdk-dynamodbstreams/resource'
-require_relative 'aws-sdk-dynamodbstreams/endpoint_parameters'
-require_relative 'aws-sdk-dynamodbstreams/endpoint_provider'
-require_relative 'aws-sdk-dynamodbstreams/endpoints'
 require_relative 'aws-sdk-dynamodbstreams/customizations'
 
 # This module provides support for Amazon DynamoDB Streams. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-dynamodbstreams/customizations'
 #
 # @!group service
 module Aws::DynamoDBStreams
+  autoload :Types, 'aws-sdk-dynamodbstreams/types'
+  autoload :ClientApi, 'aws-sdk-dynamodbstreams/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-dynamodbstreams/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-dynamodbstreams/client'
+  autoload :Errors, 'aws-sdk-dynamodbstreams/errors'
+  autoload :Resource, 'aws-sdk-dynamodbstreams/resource'
+  autoload :EndpointParameters, 'aws-sdk-dynamodbstreams/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-dynamodbstreams/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-dynamodbstreams/endpoints'
 
   GEM_VERSION = '1.62.0'
 

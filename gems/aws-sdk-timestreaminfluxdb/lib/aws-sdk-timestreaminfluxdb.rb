@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-timestreaminfluxdb/types'
-require_relative 'aws-sdk-timestreaminfluxdb/client_api'
-require_relative 'aws-sdk-timestreaminfluxdb/plugins/endpoints.rb'
-require_relative 'aws-sdk-timestreaminfluxdb/client'
-require_relative 'aws-sdk-timestreaminfluxdb/errors'
-require_relative 'aws-sdk-timestreaminfluxdb/resource'
-require_relative 'aws-sdk-timestreaminfluxdb/endpoint_parameters'
-require_relative 'aws-sdk-timestreaminfluxdb/endpoint_provider'
-require_relative 'aws-sdk-timestreaminfluxdb/endpoints'
 require_relative 'aws-sdk-timestreaminfluxdb/customizations'
 
 # This module provides support for Timestream InfluxDB. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-timestreaminfluxdb/customizations'
 #
 # @!group service
 module Aws::TimestreamInfluxDB
+  autoload :Types, 'aws-sdk-timestreaminfluxdb/types'
+  autoload :ClientApi, 'aws-sdk-timestreaminfluxdb/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-timestreaminfluxdb/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-timestreaminfluxdb/client'
+  autoload :Errors, 'aws-sdk-timestreaminfluxdb/errors'
+  autoload :Resource, 'aws-sdk-timestreaminfluxdb/resource'
+  autoload :EndpointParameters, 'aws-sdk-timestreaminfluxdb/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-timestreaminfluxdb/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-timestreaminfluxdb/endpoints'
 
   GEM_VERSION = '1.6.0'
 

@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudwatchevidently/types'
-require_relative 'aws-sdk-cloudwatchevidently/client_api'
-require_relative 'aws-sdk-cloudwatchevidently/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudwatchevidently/client'
-require_relative 'aws-sdk-cloudwatchevidently/errors'
-require_relative 'aws-sdk-cloudwatchevidently/resource'
-require_relative 'aws-sdk-cloudwatchevidently/endpoint_parameters'
-require_relative 'aws-sdk-cloudwatchevidently/endpoint_provider'
-require_relative 'aws-sdk-cloudwatchevidently/endpoints'
 require_relative 'aws-sdk-cloudwatchevidently/customizations'
 
 # This module provides support for Amazon CloudWatch Evidently. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-cloudwatchevidently/customizations'
 #
 # @!group service
 module Aws::CloudWatchEvidently
+  autoload :Types, 'aws-sdk-cloudwatchevidently/types'
+  autoload :ClientApi, 'aws-sdk-cloudwatchevidently/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudwatchevidently/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudwatchevidently/client'
+  autoload :Errors, 'aws-sdk-cloudwatchevidently/errors'
+  autoload :Resource, 'aws-sdk-cloudwatchevidently/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudwatchevidently/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudwatchevidently/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudwatchevidently/endpoints'
 
   GEM_VERSION = '1.28.0'
 

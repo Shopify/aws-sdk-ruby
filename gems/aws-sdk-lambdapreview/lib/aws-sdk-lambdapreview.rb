@@ -11,11 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lambdapreview/types'
-require_relative 'aws-sdk-lambdapreview/client_api'
-require_relative 'aws-sdk-lambdapreview/client'
-require_relative 'aws-sdk-lambdapreview/errors'
-require_relative 'aws-sdk-lambdapreview/resource'
 require_relative 'aws-sdk-lambdapreview/customizations'
 
 # This module provides support for AWS Lambda. This module is available in the
@@ -47,6 +42,11 @@ require_relative 'aws-sdk-lambdapreview/customizations'
 #
 # @!group service
 module Aws::LambdaPreview
+  autoload :Types, 'aws-sdk-lambdapreview/types'
+  autoload :ClientApi, 'aws-sdk-lambdapreview/client_api'
+  autoload :Client, 'aws-sdk-lambdapreview/client'
+  autoload :Errors, 'aws-sdk-lambdapreview/errors'
+  autoload :Resource, 'aws-sdk-lambdapreview/resource'
 
   GEM_VERSION = '1.49.0'
 

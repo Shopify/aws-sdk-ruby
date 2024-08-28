@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-route53domains/types'
-require_relative 'aws-sdk-route53domains/client_api'
-require_relative 'aws-sdk-route53domains/plugins/endpoints.rb'
-require_relative 'aws-sdk-route53domains/client'
-require_relative 'aws-sdk-route53domains/errors'
-require_relative 'aws-sdk-route53domains/resource'
-require_relative 'aws-sdk-route53domains/endpoint_parameters'
-require_relative 'aws-sdk-route53domains/endpoint_provider'
-require_relative 'aws-sdk-route53domains/endpoints'
 require_relative 'aws-sdk-route53domains/customizations'
 
 # This module provides support for Amazon Route 53 Domains. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-route53domains/customizations'
 #
 # @!group service
 module Aws::Route53Domains
+  autoload :Types, 'aws-sdk-route53domains/types'
+  autoload :ClientApi, 'aws-sdk-route53domains/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-route53domains/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-route53domains/client'
+  autoload :Errors, 'aws-sdk-route53domains/errors'
+  autoload :Resource, 'aws-sdk-route53domains/resource'
+  autoload :EndpointParameters, 'aws-sdk-route53domains/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-route53domains/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-route53domains/endpoints'
 
   GEM_VERSION = '1.63.0'
 

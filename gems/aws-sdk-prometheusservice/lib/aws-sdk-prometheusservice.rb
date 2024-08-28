@@ -11,16 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-prometheusservice/types'
-require_relative 'aws-sdk-prometheusservice/client_api'
-require_relative 'aws-sdk-prometheusservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-prometheusservice/client'
-require_relative 'aws-sdk-prometheusservice/errors'
-require_relative 'aws-sdk-prometheusservice/waiters'
-require_relative 'aws-sdk-prometheusservice/resource'
-require_relative 'aws-sdk-prometheusservice/endpoint_parameters'
-require_relative 'aws-sdk-prometheusservice/endpoint_provider'
-require_relative 'aws-sdk-prometheusservice/endpoints'
 require_relative 'aws-sdk-prometheusservice/customizations'
 
 # This module provides support for Amazon Prometheus Service. This module is available in the
@@ -52,6 +42,18 @@ require_relative 'aws-sdk-prometheusservice/customizations'
 #
 # @!group service
 module Aws::PrometheusService
+  autoload :Types, 'aws-sdk-prometheusservice/types'
+  autoload :ClientApi, 'aws-sdk-prometheusservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-prometheusservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-prometheusservice/client'
+  autoload :Errors, 'aws-sdk-prometheusservice/errors'
+  autoload :Waiters, 'aws-sdk-prometheusservice/waiters'
+  autoload :Resource, 'aws-sdk-prometheusservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-prometheusservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-prometheusservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-prometheusservice/endpoints'
 
   GEM_VERSION = '1.36.0'
 

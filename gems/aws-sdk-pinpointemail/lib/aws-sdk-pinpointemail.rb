@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-pinpointemail/types'
-require_relative 'aws-sdk-pinpointemail/client_api'
-require_relative 'aws-sdk-pinpointemail/plugins/endpoints.rb'
-require_relative 'aws-sdk-pinpointemail/client'
-require_relative 'aws-sdk-pinpointemail/errors'
-require_relative 'aws-sdk-pinpointemail/resource'
-require_relative 'aws-sdk-pinpointemail/endpoint_parameters'
-require_relative 'aws-sdk-pinpointemail/endpoint_provider'
-require_relative 'aws-sdk-pinpointemail/endpoints'
 require_relative 'aws-sdk-pinpointemail/customizations'
 
 # This module provides support for Amazon Pinpoint Email Service. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-pinpointemail/customizations'
 #
 # @!group service
 module Aws::PinpointEmail
+  autoload :Types, 'aws-sdk-pinpointemail/types'
+  autoload :ClientApi, 'aws-sdk-pinpointemail/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-pinpointemail/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-pinpointemail/client'
+  autoload :Errors, 'aws-sdk-pinpointemail/errors'
+  autoload :Resource, 'aws-sdk-pinpointemail/resource'
+  autoload :EndpointParameters, 'aws-sdk-pinpointemail/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-pinpointemail/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-pinpointemail/endpoints'
 
   GEM_VERSION = '1.54.0'
 

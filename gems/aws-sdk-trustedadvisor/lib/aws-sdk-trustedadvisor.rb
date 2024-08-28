@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-trustedadvisor/types'
-require_relative 'aws-sdk-trustedadvisor/client_api'
-require_relative 'aws-sdk-trustedadvisor/plugins/endpoints.rb'
-require_relative 'aws-sdk-trustedadvisor/client'
-require_relative 'aws-sdk-trustedadvisor/errors'
-require_relative 'aws-sdk-trustedadvisor/resource'
-require_relative 'aws-sdk-trustedadvisor/endpoint_parameters'
-require_relative 'aws-sdk-trustedadvisor/endpoint_provider'
-require_relative 'aws-sdk-trustedadvisor/endpoints'
 require_relative 'aws-sdk-trustedadvisor/customizations'
 
 # This module provides support for TrustedAdvisor Public API. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-trustedadvisor/customizations'
 #
 # @!group service
 module Aws::TrustedAdvisor
+  autoload :Types, 'aws-sdk-trustedadvisor/types'
+  autoload :ClientApi, 'aws-sdk-trustedadvisor/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-trustedadvisor/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-trustedadvisor/client'
+  autoload :Errors, 'aws-sdk-trustedadvisor/errors'
+  autoload :Resource, 'aws-sdk-trustedadvisor/resource'
+  autoload :EndpointParameters, 'aws-sdk-trustedadvisor/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-trustedadvisor/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-trustedadvisor/endpoints'
 
   GEM_VERSION = '1.10.0'
 

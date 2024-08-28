@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-taxsettings/types'
-require_relative 'aws-sdk-taxsettings/client_api'
-require_relative 'aws-sdk-taxsettings/plugins/endpoints.rb'
-require_relative 'aws-sdk-taxsettings/client'
-require_relative 'aws-sdk-taxsettings/errors'
-require_relative 'aws-sdk-taxsettings/resource'
-require_relative 'aws-sdk-taxsettings/endpoint_parameters'
-require_relative 'aws-sdk-taxsettings/endpoint_provider'
-require_relative 'aws-sdk-taxsettings/endpoints'
 require_relative 'aws-sdk-taxsettings/customizations'
 
 # This module provides support for Tax Settings. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-taxsettings/customizations'
 #
 # @!group service
 module Aws::TaxSettings
+  autoload :Types, 'aws-sdk-taxsettings/types'
+  autoload :ClientApi, 'aws-sdk-taxsettings/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-taxsettings/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-taxsettings/client'
+  autoload :Errors, 'aws-sdk-taxsettings/errors'
+  autoload :Resource, 'aws-sdk-taxsettings/resource'
+  autoload :EndpointParameters, 'aws-sdk-taxsettings/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-taxsettings/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-taxsettings/endpoints'
 
   GEM_VERSION = '1.5.0'
 

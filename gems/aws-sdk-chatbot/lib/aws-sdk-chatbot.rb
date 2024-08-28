@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-chatbot/types'
-require_relative 'aws-sdk-chatbot/client_api'
-require_relative 'aws-sdk-chatbot/plugins/endpoints.rb'
-require_relative 'aws-sdk-chatbot/client'
-require_relative 'aws-sdk-chatbot/errors'
-require_relative 'aws-sdk-chatbot/resource'
-require_relative 'aws-sdk-chatbot/endpoint_parameters'
-require_relative 'aws-sdk-chatbot/endpoint_provider'
-require_relative 'aws-sdk-chatbot/endpoints'
 require_relative 'aws-sdk-chatbot/customizations'
 
 # This module provides support for AWS Chatbot. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-chatbot/customizations'
 #
 # @!group service
 module Aws::Chatbot
+  autoload :Types, 'aws-sdk-chatbot/types'
+  autoload :ClientApi, 'aws-sdk-chatbot/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-chatbot/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-chatbot/client'
+  autoload :Errors, 'aws-sdk-chatbot/errors'
+  autoload :Resource, 'aws-sdk-chatbot/resource'
+  autoload :EndpointParameters, 'aws-sdk-chatbot/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-chatbot/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-chatbot/endpoints'
 
   GEM_VERSION = '1.10.0'
 

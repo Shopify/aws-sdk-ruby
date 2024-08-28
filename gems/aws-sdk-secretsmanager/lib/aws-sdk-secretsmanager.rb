@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-secretsmanager/types'
-require_relative 'aws-sdk-secretsmanager/client_api'
-require_relative 'aws-sdk-secretsmanager/plugins/endpoints.rb'
-require_relative 'aws-sdk-secretsmanager/client'
-require_relative 'aws-sdk-secretsmanager/errors'
-require_relative 'aws-sdk-secretsmanager/resource'
-require_relative 'aws-sdk-secretsmanager/endpoint_parameters'
-require_relative 'aws-sdk-secretsmanager/endpoint_provider'
-require_relative 'aws-sdk-secretsmanager/endpoints'
 require_relative 'aws-sdk-secretsmanager/customizations'
 
 # This module provides support for AWS Secrets Manager. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-secretsmanager/customizations'
 #
 # @!group service
 module Aws::SecretsManager
+  autoload :Types, 'aws-sdk-secretsmanager/types'
+  autoload :ClientApi, 'aws-sdk-secretsmanager/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-secretsmanager/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-secretsmanager/client'
+  autoload :Errors, 'aws-sdk-secretsmanager/errors'
+  autoload :Resource, 'aws-sdk-secretsmanager/resource'
+  autoload :EndpointParameters, 'aws-sdk-secretsmanager/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-secretsmanager/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-secretsmanager/endpoints'
 
   GEM_VERSION = '1.102.0'
 

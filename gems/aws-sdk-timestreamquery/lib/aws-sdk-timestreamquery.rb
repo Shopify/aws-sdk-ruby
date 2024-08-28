@@ -11,15 +11,6 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-timestreamquery/types'
-require_relative 'aws-sdk-timestreamquery/client_api'
-require_relative 'aws-sdk-timestreamquery/plugins/endpoints.rb'
-require_relative 'aws-sdk-timestreamquery/client'
-require_relative 'aws-sdk-timestreamquery/errors'
-require_relative 'aws-sdk-timestreamquery/resource'
-require_relative 'aws-sdk-timestreamquery/endpoint_parameters'
-require_relative 'aws-sdk-timestreamquery/endpoint_provider'
-require_relative 'aws-sdk-timestreamquery/endpoints'
 require_relative 'aws-sdk-timestreamquery/customizations'
 
 # This module provides support for Amazon Timestream Query. This module is available in the
@@ -51,6 +42,17 @@ require_relative 'aws-sdk-timestreamquery/customizations'
 #
 # @!group service
 module Aws::TimestreamQuery
+  autoload :Types, 'aws-sdk-timestreamquery/types'
+  autoload :ClientApi, 'aws-sdk-timestreamquery/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-timestreamquery/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-timestreamquery/client'
+  autoload :Errors, 'aws-sdk-timestreamquery/errors'
+  autoload :Resource, 'aws-sdk-timestreamquery/resource'
+  autoload :EndpointParameters, 'aws-sdk-timestreamquery/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-timestreamquery/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-timestreamquery/endpoints'
 
   GEM_VERSION = '1.38.0'
 
