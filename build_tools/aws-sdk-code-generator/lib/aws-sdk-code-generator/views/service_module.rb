@@ -61,15 +61,13 @@ module AwsSdkCodeGenerator
       end
 
       # @return [Array<String>]
-      def relative_requires
+      def autoloads
         paths = Set.new
         paths << "#{@prefix}/types"
         paths << "#{@prefix}/client_api"
 
         # these must be required before the client
-        if @codegenerated_plugins
-          paths += @codegenerated_plugins.map { | p| p.path }
-        end
+        paths += @codegenerated_plugins.map { |p| p.path } if @codegenerated_plugins
 
         paths << "#{@prefix}/client"
         paths << "#{@prefix}/errors"
@@ -94,13 +92,29 @@ module AwsSdkCodeGenerator
         end
         paths << "#{@prefix}/customizations"
         if @service.api['metadata']['protocolSettings'] &&
-          @service.api['metadata']['protocolSettings']['h2'] == 'eventstream'
+           @service.api['metadata']['protocolSettings']['h2'] == 'eventstream'
           paths << "#{@prefix}/async_client"
           paths << "#{@prefix}/event_streams"
         elsif eventstream_shape?
           paths << "#{@prefix}/event_streams"
         end
-        paths.to_a
+
+        plugin_paths = @codegenerated_plugins&.map { |p| [p.path, p] }.to_h || {}
+
+        results = paths.map do |path|
+          class_name = File.basename(path).split('.').first.split('_').map(&:capitalize).join
+          {
+            file_path: path,
+            class_name: class_name,
+            is_plugin: plugin_paths.key?(path)
+          }
+        end
+
+        results.reject { |r| r[:class_name].include?('Customizations') }
+      end
+
+      def service_identifier
+        @prefix
       end
 
       def example_var_name
