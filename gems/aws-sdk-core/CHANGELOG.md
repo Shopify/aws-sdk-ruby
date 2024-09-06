@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+3.203.0 (2024-09-03)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add support for Observability which includes a configuration, `telemetry_provider` and an OpenTelemetry-based telemetry provider.
+
+3.202.2 (2024-08-30)
+------------------
+
+* Issue - revert auto-loading of bundled gems.
+
+3.202.1 (2024-08-29)
+------------------
+
+* Issue - require default plugins when loading aws-sdk-core.
+
 3.202.0 (2024-08-27)
 ------------------
 

@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::BedrockAgent
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::BedrockAgent::Plugins::Endpoints)
@@ -330,6 +332,16 @@ module Aws::BedrockAgent
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
+    #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
     #     following classes:
@@ -511,9 +523,13 @@ module Aws::BedrockAgent
     #   to use advanced prompts, include a `promptOverrideConfiguration`
     #   object. For more information, see [Advanced prompts][2].
     #
-    # * If you agent fails to be created, the response returns a list of
+    # * If your agent fails to be created, the response returns a list of
     #   `failureReasons` alongside a list of `recommendedActions` for you to
     #   troubleshoot.
+    #
+    # * The agent instructions will not be honored if your agent has only
+    #   one knowledge base, uses default prompts, has no action group, and
+    #   user input is disabled.
     #
     #
     #
@@ -2005,6 +2021,12 @@ module Aws::BedrockAgent
     #             top_p: 1.0,
     #           },
     #         },
+    #         metadata: [
+    #           {
+    #             key: "PromptMetadataKey", # required
+    #             value: "PromptMetadataValue", # required
+    #           },
+    #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
     #         template_configuration: {
@@ -2039,6 +2061,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -2133,6 +2158,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -3379,6 +3407,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -5554,6 +5585,12 @@ module Aws::BedrockAgent
     #             top_p: 1.0,
     #           },
     #         },
+    #         metadata: [
+    #           {
+    #             key: "PromptMetadataKey", # required
+    #             value: "PromptMetadataValue", # required
+    #           },
+    #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
     #         template_configuration: {
@@ -5588,6 +5625,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -5611,14 +5651,19 @@ module Aws::BedrockAgent
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::BedrockAgent')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
