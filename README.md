@@ -1,3 +1,5 @@
+> **This repository is no longer maintained.** It has been archived and receives no updates or security fixes.
+
 # AWS SDK for Ruby - Version 3
 
 [![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core)
